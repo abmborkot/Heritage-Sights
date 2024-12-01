@@ -1,0 +1,66 @@
+
+
+
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <title>Heritage</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+    <link rel="stylesheet" href="{% static 'heritage.css' %}"/>
+    <meta charset="utf-8">
+</head>
+<body>
+    
+    <section class="header">
+        <nav>
+          <div class="logo"><strong>HISTORY INSIGHTS</strong></div>
+          <div class="nav-links">
+            <ul>
+              <li><a href="http://127.0.0.1:8000/">HOME</a></li>
+              <li><a href="http://127.0.0.1:8000/heritage/">HERITAGE</a></li>
+              <li><a href="http://127.0.0.1:8000/make_plan/">MAKE PLAN</a></li>
+              <li><a href="http://127.0.0.1:8000/about/">ABOUT US</a></li>
+              <li><a href="http://127.0.0.1:8000/contact/">CONTACT US</a></li>
+              
+          
+              {% if request.user.is_authenticated %}
+                  <!-- Show logged-in user's username -->
+                  <li><a href="http://127.0.0.1:8000/logout">LOGOUT</a></li>
+                  <li><a href="http://127.0.0.1:8000/profile_page/">{{ request.user.username }}</a></li>
+              {% else %}
+                  <!-- Show login link if not authenticated -->
+                  <li><a href="http://127.0.0.1:8000/sign_in/">LOGIN</a></li>
+                  <li><a href="http://127.0.0.1:8000/sign_up/">SIGN UP</a></li>
+              {% endif %}
+          </ul>
+          
+          </div>
+        </nav>
+      </section>
+    <div class="banner">
+    
+        <div class="content">
+            <h1>&nbsp SEARCH YOUR DESIRE<br>&nbsp DESTINATION</h1>
+
+
+            <div class="box">
+                <h2 STYLE="margin:30px 20px 10px 35px"><a href="http://127.0.0.1:8000/list_of_sights/">The Historical Places of Bangladesh</a></h2>
+                <form  action="{% url 'places' %}" method="get">
+                    <input type="text" id="search"  name="search"  placeholder="type here...." STYLE="margin:30px 20px 10px 35px">
+                    {% csrf_token %}
+                    <input type="submit" name="" value="Search">
+
+                </form>
+            </div>
+                {% for msg in messages %}
+                    {{msg}}
+                 {% endfor %}
+
+        </div>
+
+    </div>
+ </body>
+
+</html>

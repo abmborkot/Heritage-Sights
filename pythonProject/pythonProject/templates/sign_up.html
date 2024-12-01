@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+    <head>
+        <title>Signup</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+        <link rel="stylesheet" href="{% static 'sign_up.css' %}"/>
+    </head>
+    <body>
+        <section class="container">
+            <nav>
+                <div class="logo"><strong>HISTORY INSIGHTS</strong></div>
+                <div class="nav-links">
+                    <ul>
+                        <li><a href="http://127.0.0.1:8000/">HOME</a></li>
+                        <li><a href="http://127.0.0.1:8000/heritage/">HERITAGE</a></li>
+                        <li><a href="http://127.0.0.1:8000/make_plan/">MAKE PLAN</a></li>
+                        <li><a href="http://127.0.0.1:8000/about/">ABOUT US</a></li>
+                        <li><a href="http://127.0.0.1:8000/contact/">CONTACT US</a></li>
+                        <li><a href="http://127.0.0.1:8000/sign_up/">SIGN UP</a></li>
+                        {% if request.user.is_authenticated %}
+    <!--                    <p>{{request.user}}</p>-->
+                        <li><a href="http://127.0.0.1:8000/logout">LOGOUT</a></li>
+                        <li><a href="http://127.0.0.1:8000/profile_page/">{{request.user}}</a></li>
+                        {% else %}
+                        <li><a href="http://127.0.0.1:8000/sign_in/">LOGIN</a></li>
+                        <li><a href="http://127.0.0.1:8000/profile_page/">PROFILE</a></li>
+                        {% endif %}
+    
+                    </ul>
+                </div>
+            </nav>
+        <form action='/signup' method='POST'>
+            <h1>SignUp</h1>
+            <input type="text" placeholder="Full Name" name="first_name" required>
+            <input type="text" placeholder="Username" name="name" required>
+            <input type="email" placeholder="Email" name="email" required>
+            <input type="password" placeholder="Password" name="password" required>
+            <input type="password" placeholder="Confirm Password" name="confirmPassword" required>
+            {% csrf_token %}
+            <button type="submit">SignUp</button>
+
+        </form>
+        <br>
+        {% for msg in messages %}
+                {{msg}}
+            {% endfor %}
+    </section>
+    </body>
+</html>

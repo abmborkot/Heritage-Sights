@@ -239,7 +239,10 @@ def handleProfile(request):
 def searchbarr(request):
     if request.method == 'GET':
         search = request.GET.get('search')
+        print("Serch............")
+        print(search)
         post = HeritageDetails.objects.all().filter(PlaceName=search)
+        print(post)
         return render(request, 'searchbar.html', {'post': post})
 
 

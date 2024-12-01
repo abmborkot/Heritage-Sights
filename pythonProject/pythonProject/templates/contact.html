@@ -19,8 +19,19 @@
               <li><a href="http://127.0.0.1:8000/make_plan/">MAKE PLAN</a></li>
               <li><a href="http://127.0.0.1:8000/about/">ABOUT US</a></li>
               <li><a href="http://127.0.0.1:8000/contact/">CONTACT US</a></li>
-              <li><a href="http://127.0.0.1:8000/sign_up/">SIGN UP</a></li>
-            </ul>
+              
+          
+              {% if request.user.is_authenticated %}
+                  <!-- Show logged-in user's username -->
+                  <li><a href="http://127.0.0.1:8000/logout">LOGOUT</a></li>
+                  <li><a href="http://127.0.0.1:8000/profile_page/">{{ request.user.username }}</a></li>
+              {% else %}
+                  <!-- Show login link if not authenticated -->
+                  <li><a href="http://127.0.0.1:8000/sign_in/">LOGIN</a></li>
+                  <li><a href="http://127.0.0.1:8000/sign_up/">SIGN UP</a></li>
+              {% endif %}
+          </ul>
+          
           </div>
         </nav>
       </section>
